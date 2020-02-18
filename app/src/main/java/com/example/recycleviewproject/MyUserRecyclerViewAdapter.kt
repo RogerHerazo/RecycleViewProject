@@ -24,11 +24,20 @@ class MyUserRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: MyUserRecyclerViewAdapter.Viewholder, position: Int) {
         val item = mValues[position]
-        holder.textView.text = item.nombre
+        holder.textView1.text = item.titulo
+        holder.textView2.text = item.nombre
+        holder.textView3.text = item.apellido
+        holder.textView4.text = item.email
+        holder.textView5.text = item.telefono
     }
 
     inner class Viewholder(val mView: View) : RecyclerView.ViewHolder(mView){
         val button : Button = mView.buttonDeleteUser
-        val textView: TextView = mView.textViewUserName
+        val textView1: TextView = mView.textViewUserTitle
+        val textView2: TextView = mView.textViewUserName
+        val textView3: TextView = mView.textViewUserLastname
+        val textView4: TextView = mView.textViewUserEmail
+        val textView5: TextView = mView.textViewUserPhone
+
     }
 }

@@ -26,8 +26,18 @@ class MainFragmentList : Fragment() {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_main_fragment_list, container, false)
 
-        users.add(User("Roger"))
-        users.add(User("Daniel"))
+
+        users.add(User("Mr","Brad","Gibson", "brad.gibson@example.com", "011-962-7516"))
+        users.add(User("Ms","Margot", "Guillaume", "margot.guillaume@example.com", "06-64-02-54-93"))
+        users.add(User("Mr", "Noah", "Brown", "noah.brown@example.com", "087-268-7339"))
+        users.add(User("Mr", "Joel", "Jutila", "joel.jutila@example.com", "049-811-51-61"))
+        users.add(User("Miss", "Fabiana", "Freitas", "fabiana.freitas@example.com", "(57) 9904-3198"))
+        users.add(User("Mr", "Helge", "Brenna", "helge.brenna@example.com", "45464466"))
+        users.add(User("Mr", "Eeli", "Salo","eeli.salo@example.com", "049-729-79-30"))
+        users.add(User("Miss", "Signe", "Nielsen", "signe.nielsen@example.com", "19807694"))
+        users.add(User("Mr", "Aaron", "Smith", "aaron.smith@example.com", "(684)-716-4481"))
+        users.add(User("Mrs", "Madison", "Singh", "madison.singh@example.com", "335-336-3878"))
+        users.add(User("Miss", "Josefine", "Hansen", "josefine.hansen@example.com", "33059620"))
         adapter = MyUserRecyclerViewAdapter(users)
 
         view.list.layoutManager = LinearLayoutManager(context)
