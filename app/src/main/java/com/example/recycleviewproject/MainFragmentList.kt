@@ -23,7 +23,7 @@ import kotlin.math.PI
 class MainFragmentList : Fragment(), View.OnClickListener, MyUserRecyclerViewAdapter.onListInteraction  {
 
 
-    lateinit var navController: NavController
+    private lateinit var navController: NavController
     lateinit var Brad: User
     lateinit var Margot: User
     lateinit var Noah: User
@@ -54,8 +54,8 @@ class MainFragmentList : Fragment(), View.OnClickListener, MyUserRecyclerViewAda
 
         view.floatingActionButton.setOnClickListener{
             users.add(User("Jhon"+count, "Doe"+count))
-            count++;
-            adapter!!.updateData();
+            count++
+            adapter!!.updateData()
         }
         return view
     }
@@ -79,9 +79,9 @@ class MainFragmentList : Fragment(), View.OnClickListener, MyUserRecyclerViewAda
 
     override fun onListInteraction(item: User?) {
         //Log.d("KRecycle", "onListInteraction" + item!!.nombre)
-        //val bundle = bundleOf("data" to User
+        val bundle = bundleOf("data" to item)
         //val bundle = bundleOf("nombre" to item?.nombre)
-        navController!!.navigate(R.id.action_mainFragmentList_to_personalFragment)
+        navController!!.navigate(R.id.action_mainFragmentList_to_personalFragment, bundle)
     }
 
 }

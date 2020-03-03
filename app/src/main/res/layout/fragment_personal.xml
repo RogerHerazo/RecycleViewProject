@@ -8,7 +8,7 @@
     <data>
         <variable
             name="user"
-            type="com.example.recycleviewproject.data.User" />8
+            type="com.example.recycleviewproject.data.User" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,10 +17,13 @@
         tools:context=".PersonalFragment">
 
         <!-- TODO: Update blank fragment layout -->
+
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline4"
@@ -33,28 +36,28 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Brad"
+            android:text="@{user.nombre}"
             android:textAlignment="center"
-            android:textSize="40dp"
+            android:textSize="40sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline4"
             app:layout_constraintEnd_toStartOf="@+id/textView4"
-            app:layout_constraintHorizontal_bias="0.484"
+            app:layout_constraintHorizontal_bias="0.356"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView3"
-            app:layout_constraintVertical_bias="0.608" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.554" />
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="138dp"
-            android:layout_height="44dp"
-            android:layout_marginEnd="60dp"
-            android:layout_marginRight="60dp"
-            android:text="Gibson"
-            android:textSize="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="100dp"
+            android:layout_marginRight="100dp"
+            android:text="@{user.apellido}"
+            android:textSize="40sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.549" />
+            app:layout_constraintVertical_bias="0.554" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -66,6 +69,14 @@
             android:src="@mipmap/profilepic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline4" />
+
+        <Button
+            android:id="@+id/prevScreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Atras"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
