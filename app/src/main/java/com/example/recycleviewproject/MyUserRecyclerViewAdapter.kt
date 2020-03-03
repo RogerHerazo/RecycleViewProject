@@ -45,5 +45,6 @@ class MyUserRecyclerViewAdapter(
 
     interface onListInteraction{
         fun onListInteraction(item: User?)
+
     }
 }

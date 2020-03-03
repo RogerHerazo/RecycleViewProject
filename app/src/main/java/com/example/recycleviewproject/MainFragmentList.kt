@@ -13,6 +13,9 @@ import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
 import com.example.recycleviewproject.data.User
 import kotlinx.android.synthetic.main.fragment_main_fragment_list.view.*
 import kotlin.math.PI
@@ -56,8 +59,28 @@ class MainFragmentList : Fragment(), View.OnClickListener, MyUserRecyclerViewAda
             users.add(User("Jhon"+count, "Doe"+count))
             count++
             adapter!!.updateData()
+
+            VolleySingleton.getInstance(activity!!.applicationContext).addToRequestQueue(getStringRequest())
         }
         return view
+    }
+
+    fun getStringRequest() : StringRequest {
+        val url = "http://www.google.com"
+
+// Request a string response from the provided URL.
+        val stringRequest = StringRequest(
+            Request.Method.GET, url,
+            Response.Listener<String> { response ->
+                // Display the first 500 characters of the response string.
+                //textView.text = "Response is: ${response.substring(0, 500)}"
+                Log.d("Response","Response is: ${response.substring(0, 500)}")
+            },
+            Response.ErrorListener {
+                //textView.text = "That didn't work!"
+                Log.d("Error","That didn't work!")})
+
+        return stringRequest
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
