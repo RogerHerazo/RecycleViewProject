@@ -11,12 +11,14 @@ import com.example.recycleviewproject.data.User
 import kotlinx.android.synthetic.main.row.view.*
 
 class MyUserRecyclerViewAdapter(
-    private val mValues: List<User>) : RecyclerView.Adapter<MyUserRecyclerViewAdapter.Viewholder>() {
+    private val mValues: List<User>,
+    private val mListener : onListInteraction
+    ) : RecyclerView.Adapter<MyUserRecyclerViewAdapter.Viewholder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): Viewholder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.row, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_row, parent, false)
         return Viewholder(view)
     }
 
@@ -24,20 +26,24 @@ class MyUserRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: MyUserRecyclerViewAdapter.Viewholder, position: Int) {
         val item = mValues[position]
-        holder.textView1.text = item.titulo
         holder.textView2.text = item.nombre
         holder.textView3.text = item.apellido
-        holder.textView4.text = item.email
-        holder.textView5.text = item.telefono
+
+        holder.mView.setOnClickListener{
+            mListener?.onListInteraction(item)
+        }
+    }
+
+    public fun updateData(){
+        notifyDataSetChanged()
     }
 
     inner class Viewholder(val mView: View) : RecyclerView.ViewHolder(mView){
-        val button : Button = mView.buttonDeleteUser
-        val textView1: TextView = mView.textViewUserTitle
         val textView2: TextView = mView.textViewUserName
         val textView3: TextView = mView.textViewUserLastname
-        val textView4: TextView = mView.textViewUserEmail
-        val textView5: TextView = mView.textViewUserPhone
+    }
 
+    interface onListInteraction{
+        fun onListInteraction(item: User?)
     }
 }
