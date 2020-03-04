@@ -8,7 +8,11 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recycleviewproject.data.User
+import kotlinx.android.synthetic.main.fragment_row.view.*
 import kotlinx.android.synthetic.main.row.view.*
+import kotlinx.android.synthetic.main.row.view.textViewUserLastname
+import kotlinx.android.synthetic.main.row.view.textViewUserName
+import kotlinx.android.synthetic.main.row.view.textViewUserTitle
 
 class MyUserRecyclerViewAdapter(
     private val mValues: List<User>,
@@ -26,8 +30,11 @@ class MyUserRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: MyUserRecyclerViewAdapter.Viewholder, position: Int) {
         val item = mValues[position]
+        holder.textView1.text = item.titulo
         holder.textView2.text = item.nombre
         holder.textView3.text = item.apellido
+        holder.textView4.text = item.mail
+        holder.textView5.text = item.phone
 
         holder.mView.setOnClickListener{
             mListener?.onListInteraction(item)
@@ -39,8 +46,11 @@ class MyUserRecyclerViewAdapter(
     }
 
     inner class Viewholder(val mView: View) : RecyclerView.ViewHolder(mView){
+        val textView1: TextView = mView.textViewUserTitle
         val textView2: TextView = mView.textViewUserName
         val textView3: TextView = mView.textViewUserLastname
+        val textView4: TextView = mView.textViewUserEmail
+        val textView5: TextView = mView.textViewUserPhone
     }
 
     interface onListInteraction{

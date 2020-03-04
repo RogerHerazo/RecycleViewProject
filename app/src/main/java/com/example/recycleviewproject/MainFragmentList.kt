@@ -15,9 +15,12 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.example.recycleviewproject.data.User
 import kotlinx.android.synthetic.main.fragment_main_fragment_list.view.*
+import org.json.JSONArray
+import org.json.JSONObject
 import kotlin.math.PI
 
 /**
@@ -44,29 +47,21 @@ class MainFragmentList : Fragment(), View.OnClickListener, MyUserRecyclerViewAda
         val view =  inflater.inflate(R.layout.fragment_main_fragment_list, container, false)
 
 
-        users.add(User("Mr","Brad","Gibson"))
-        users.add(User("Ms","Margot", "Guillaume"))
-        users.add(User( "Mr","Noah", "Brown"))
-        users.add(User( "Mr","Joel", "Jutila"))
-        users.add(User( "Ms","Fabiana", "Freitas"))
-
         adapter = MyUserRecyclerViewAdapter(users, this)
 
         view.list.layoutManager = LinearLayoutManager(context)
         view.list.adapter = adapter
 
         view.floatingActionButton.setOnClickListener{
-            users.add(User("Mr","Jhon"+count, "Doe"+count))
-            count++
-            adapter!!.updateData()
 
-            VolleySingleton.getInstance(activity!!.applicationContext).addToRequestQueue(getStringRequest())
+
+            VolleySingleton.getInstance(activity!!.applicationContext).addToRequestQueue(getJsonObjectRequest())
         }
         return view
     }
 
     fun getStringRequest() : StringRequest {
-        val url = "http://www.google.com"
+        val url = "https://randomuser.me/api?results=5"
 
 // Request a string response from the provided URL.
         val stringRequest = StringRequest(
@@ -83,16 +78,46 @@ class MainFragmentList : Fragment(), View.OnClickListener, MyUserRecyclerViewAda
         return stringRequest
     }
 
+    fun getJsonObjectRequest() : JsonObjectRequest {
+        val url = "https://randomuser.me/api"
+
+        val jsonObjectRequest = JsonObjectRequest(
+            Request.Method.GET, url, null,
+            Response.Listener { response ->
+                parseObject (response)
+                //parseObjectG (response)
+            },
+            Response.ErrorListener{
+                Log.d("Error","error")
+            }
+        )
+
+        return jsonObjectRequest
+    }
+
+    fun parseObject(response: JSONObject){
+        val jsonArrayResults : JSONArray = response.getJSONArray("results")
+        val size : Int = jsonArrayResults.length()
+        val i : Int = 0
+        for (i in 0..size -1){
+            val userObject = jsonArrayResults.getJSONObject(i)
+            //val gender = userObject.getString("gender")
+            val nameObject = userObject.getJSONObject("name")
+            val titulo  = nameObject.getString("title")
+            val nombre = nameObject.getString("first")
+            val apellido = nameObject.getString("last")
+            val mail = userObject.getString("email")
+            val phone = userObject.getString("phone")
+            Log.d("JSONparsing",    titulo + " " + nombre + "  " + apellido + "  " + mail + "  " + phone)
+            users.add(User(titulo,nombre, apellido, mail, phone))
+            adapter!!.updateData()
+        }
+    }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-
-
-        Brad = User("Mr","Brad","Gibson")
-        Margot = User("Ms","Margot", "Guillaume")
-        Noah = User("Mr", "Noah", "Brown")
-        Joel = User("Mr", "Joel", "Jutila")
-        Fabiana = User("Ms", "Fabiana", "Freitas")
 
     }
 

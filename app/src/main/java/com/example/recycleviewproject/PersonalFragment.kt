@@ -16,10 +16,9 @@ import com.example.recycleviewproject.databinding.FragmentPersonalBinding
 /**
  * A simple [Fragment] subclass.
  */
-class PersonalFragment : Fragment(), View.OnClickListener  {
+class PersonalFragment : Fragment(){
 
     lateinit var mBinding: FragmentPersonalBinding
-    lateinit var navController: NavController
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,19 +31,10 @@ class PersonalFragment : Fragment(), View.OnClickListener  {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navController = Navigation.findNavController(view)
-        view.findViewById<Button>(R.id.prevScreen).setOnClickListener(this)
         //mBinding = DataBindingUtil.setContentView(this.requireActivity(), R.layout.fragment_personal)
         mBinding.user = arguments!!.getParcelable("data")!!
     }
 
-    override fun onClick(v: View?) {
-        when(v!!.id){
-            R.id.prevScreen -> {
-                navController!!.navigate(R.id.action_personalFragment_to_mainFragmentList)
-            }
-        }
-    }
 
 
 }
