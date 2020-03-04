@@ -25,14 +25,16 @@ class PersonalFragment : Fragment(), View.OnClickListener  {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_personal, container, false)
+        //return inflater.inflate(R.layout.fragment_personal, container, false)
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_personal, container, false)
+        return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
         view.findViewById<Button>(R.id.prevScreen).setOnClickListener(this)
-        mBinding = DataBindingUtil.setContentView(this.requireActivity(), R.layout.fragment_personal)
+        //mBinding = DataBindingUtil.setContentView(this.requireActivity(), R.layout.fragment_personal)
         mBinding.user = arguments!!.getParcelable("data")!!
     }
 

@@ -44,11 +44,11 @@ class MainFragmentList : Fragment(), View.OnClickListener, MyUserRecyclerViewAda
         val view =  inflater.inflate(R.layout.fragment_main_fragment_list, container, false)
 
 
-        users.add(User("Brad","Gibson"))
-        users.add(User("Margot", "Guillaume"))
-        users.add(User( "Noah", "Brown"))
-        users.add(User( "Joel", "Jutila"))
-        users.add(User( "Fabiana", "Freitas"))
+        users.add(User("Mr","Brad","Gibson"))
+        users.add(User("Ms","Margot", "Guillaume"))
+        users.add(User( "Mr","Noah", "Brown"))
+        users.add(User( "Mr","Joel", "Jutila"))
+        users.add(User( "Ms","Fabiana", "Freitas"))
 
         adapter = MyUserRecyclerViewAdapter(users, this)
 
@@ -56,7 +56,7 @@ class MainFragmentList : Fragment(), View.OnClickListener, MyUserRecyclerViewAda
         view.list.adapter = adapter
 
         view.floatingActionButton.setOnClickListener{
-            users.add(User("Jhon"+count, "Doe"+count))
+            users.add(User("Mr","Jhon"+count, "Doe"+count))
             count++
             adapter!!.updateData()
 
@@ -88,11 +88,11 @@ class MainFragmentList : Fragment(), View.OnClickListener, MyUserRecyclerViewAda
         navController = Navigation.findNavController(view)
 
 
-        Brad = User("Brad","Gibson")
-        Margot = User("Margot", "Guillaume")
-        Noah = User( "Noah", "Brown")
-        Joel = User( "Joel", "Jutila")
-        Fabiana = User( "Fabiana", "Freitas")
+        Brad = User("Mr","Brad","Gibson")
+        Margot = User("Ms","Margot", "Guillaume")
+        Noah = User("Mr", "Noah", "Brown")
+        Joel = User("Mr", "Joel", "Jutila")
+        Fabiana = User("Ms", "Fabiana", "Freitas")
 
     }
 
